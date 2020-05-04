@@ -2,8 +2,8 @@
 
 OCaml.library("ocplib-pgocaml", ocaml +
   {
-    bytecomp = ocaml.bytecomp + nowarnings;
-    asmcomp = ocaml.asmcomp + nowarnings;
+    bytecomp = ocaml.bytecomp;
+    asmcomp = ocaml.asmcomp;
 
     files = [
       "PGOCaml_config.ml" ;
