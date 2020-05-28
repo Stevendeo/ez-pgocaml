@@ -1,6 +1,6 @@
 
 let main database ?(downgrades=[]) ?host ?port ?user ?password ~upgrades =
-  Printf.eprintf "EzPGUpdater.main on %s" database;
+  Printf.eprintf "EzPGUpdater.main on %s@." database;
   let database = ref database in
   let verbose = ref false in
   let witness = ref None in
@@ -44,11 +44,11 @@ let main database ?(downgrades=[]) ?host ?port ?user ?password ~upgrades =
   let dbh =
     try
       let dbh = EzPG.connect ?host ?port ?user ?password database in
-      Printf.eprintf "Connection to database %s OK" database;
+      Printf.eprintf "Connection to database %s OK@." database;
       dbh
     with _ ->
-      Printf.eprintf "Database not found, creating database %s" database;
-      EzPG.createdb database;
+      Printf.eprintf "Database not found, creating database %s@." database;
+      EzPG.createdb ?host ?port ?user ?password database;
       Printf.eprintf "Database %s created, connecting..." database;
       let dbh = EzPG.connect ?host ?port ?user ?password database in
       EzPG.init ?witness dbh;

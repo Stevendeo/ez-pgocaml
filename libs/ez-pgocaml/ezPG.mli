@@ -37,8 +37,19 @@ val touch_witness : ?witness:string -> int -> unit
 val init : ?witness:string -> 'a PGOCaml.t -> unit
 
 (* Useful functions to create the initial database *)
-val createdb : ?verbose:bool -> string -> unit
-val dropdb : ?verbose:bool -> string -> unit
+val createdb : 
+  ?verbose:bool -> 
+  ?host:string ->
+  ?port:int ->
+  ?user:string ->
+  ?password:string -> string -> unit
+
+val dropdb : 
+  ?verbose:bool ->
+  ?host:string ->
+  ?port:int ->
+  ?user:string ->
+  ?password:string -> string -> unit
 
 val begin_tr : 'a PGOCaml.t -> unit
 val end_tr : 'a PGOCaml.t -> unit
