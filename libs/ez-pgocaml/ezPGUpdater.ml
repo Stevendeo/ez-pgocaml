@@ -1,5 +1,5 @@
 
-let main database ?(downgrades=[]) ~upgrades =
+let main database ?(downgrades=[]) ?host ?port ?user ?password ~upgrades =
   let database = ref database in
   let verbose = ref false in
   let witness = ref None in
@@ -42,10 +42,10 @@ let main database ?(downgrades=[]) ~upgrades =
 
   let dbh =
     try
-      EzPG.connect database
+      EzPG.connect ?host ?port ?user ?password database
     with _ ->
       EzPG.createdb database;
-      let dbh = EzPG.connect database in
+      let dbh = EzPG.connect ?host ?port ?user ?password database in
       EzPG.init ?witness dbh;
       dbh
   in
